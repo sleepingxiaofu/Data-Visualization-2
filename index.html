@@ -33,10 +33,9 @@
       "height": 600,
       
       "projection": {
-        "type": "cylindricalEqualArea",
-        "center": [109.455, 0],
-        "parallels": [4.115],
-        "scale": 2500
+        "type": "mercator",
+        "center": [109, 4],
+        "scale": 2200
       },
       
       "layer": [
@@ -55,7 +54,7 @@
         },
         {
           "data": {
-            "url": "malaysia_districts.topojson",
+            "url": "malaysia_districts.json",
             "format": {
               "type": "topojson",
               "feature": "my"
@@ -81,8 +80,8 @@
               "field": "schools_per_10k",
               "type": "quantitative",
               "scale": {
-                "scheme": "YlGnBu",
-                "domain": [2000, 8000]
+                "scheme": "oranges",
+                "domain": [2500, 12000]
               },
               "legend": {
                 "title": "Schools per 10,000 Population",
@@ -91,7 +90,7 @@
             },
             "tooltip": [
               {"field": "properties.name", "type": "nominal", "title": "State"},
-              {"field": "schools_per_10k", "type": "quantitative", "title": "Schools per 10K", "format": ".0f"}
+              {"field": "schools_per_10k", "type": "quantitative", "title": "Schools per 10,000 Population", "format": ".0f"}
             ]
           }
         }
