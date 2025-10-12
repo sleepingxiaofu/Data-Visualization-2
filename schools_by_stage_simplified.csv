@@ -1,0 +1,33 @@
+state,stage,schools,percentage
+Johor,Primary,1816,76.2
+Johor,Secondary,568,23.8
+Kedah,Primary,1096,72.9
+Kedah,Secondary,408,27.1
+Kelantan,Primary,836,70.1
+Kelantan,Secondary,356,29.9
+Melaka,Primary,476,75.3
+Melaka,Secondary,156,24.7
+Negeri Sembilan,Primary,706,73.7
+Negeri Sembilan,Secondary,252,26.3
+Pahang,Primary,1086,73.3
+Pahang,Secondary,396,26.7
+Perak,Primary,1704,77.1
+Perak,Secondary,506,22.9
+Perlis,Primary,148,71.2
+Perlis,Secondary,60,28.8
+Pulau Pinang,Primary,540,67.8
+Pulau Pinang,Secondary,256,32.2
+Sabah,Primary,2150,82.9
+Sabah,Secondary,442,17.1
+Sarawak,Primary,2530,86.8
+Sarawak,Secondary,386,13.2
+Selangor,Primary,1322,70.3
+Selangor,Secondary,558,29.7
+Terengganu,Primary,704,69.6
+Terengganu,Secondary,308,30.4
+W.P. Kuala Lumpur,Primary,376,64.4
+W.P. Kuala Lumpur,Secondary,208,35.6
+W.P. Labuan,Primary,34,60.7
+W.P. Labuan,Secondary,22,39.3
+W.P. Putrajaya,Primary,32,59.3
+W.P. Putrajaya,Secondary,22,40.7
