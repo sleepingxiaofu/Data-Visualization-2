@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Education Access and Equity in Malaysia</title>
     
+    <!-- Vega Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.6.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+    
+    <!-- Google Fonts - Playfair Display for main heading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* Typography and Base Styles */
@@ -20,8 +26,8 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
-            color: #2C4A6B; /* Changed from #4D6F94 */
-            background-color: #f7f7f7; /* Lighter background */
+            color: #2C4A6B;
+            background-color: #f7f7f7;
         }
         
         /* Serif fonts for titles */
@@ -36,19 +42,21 @@
             padding: 0 20px;
         }
         
-        /* Header */
+        /* Header with Display Font */
         header {
-            background: linear-gradient(135deg, #53a8e1 0%, #afd3e7 100%); /* New gradient */
+            background: linear-gradient(135deg, #53a8e1 0%, #afd3e7 100%);
             color: white;
             padding: 80px 0;
             text-align: center;
         }
         
         header h1 {
-            font-size: 3.2em;
-            font-weight: 300;
+            font-family: 'Playfair Display', Georgia, serif; /* Display font - RUBRIC */
+            font-size: 4em; /* Increased from 3.2em */
+            font-weight: 700; /* Bolder - RUBRIC */
             margin-bottom: 15px;
             letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Added shadow */
         }
         
         header p {
@@ -65,7 +73,7 @@
             padding: 60px 0;
             margin-top: -40px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(44, 74, 107, 0.1); /* Adjusted shadow */
+            box-shadow: 0 4px 20px rgba(44, 74, 107, 0.1);
         }
         
         .stats-grid {
@@ -76,12 +84,12 @@
         }
         
         .stat-card {
-            background: #fdcd8c; /* New warm color */
+            background: #fdcd8c;
             padding: 40px 30px;
             border-radius: 8px;
             text-align: center;
             color: #2C4A6B;
-            border: 1px solid #d0bbdb; /* New neutral color */
+            border: 1px solid #d0bbdb;
         }
         
         .stat-value {
@@ -105,10 +113,10 @@
         /* Section Styles */
         section {
             background: white;
-            margin: 50px 0;
+            margin: 40px 0; /* Reduced from 50px - LAYOUT */
             padding: 60px;
             border-radius: 8px;
-            border: 1px solid #d0bbdb; /* New neutral color */
+            border: 1px solid #d0bbdb;
         }
         
         section h2 {
@@ -144,19 +152,19 @@
         
         /* Content Styles */
         .section-intro {
-            font-size: 1.1em;
+            font-size: 1.05em; /* Slightly reduced */
             color: #2C4A6B;
-            line-height: 1.8;
+            line-height: 1.7; /* Tighter */
             margin-bottom: 30px;
         }
         
         /* Interactive Controls */
         .controls {
-            background: #fdcd8c; /* New warm color */
+            background: #fdcd8c;
             padding: 25px;
             margin: 25px 0;
             border-radius: 8px;
-            border: 1px solid #d0bbdb; /* New neutral color */
+            border: 1px solid #d0bbdb;
         }
         
         .controls h4 {
@@ -174,7 +182,7 @@
         .control-btn {
             padding: 10px 20px;
             background: white;
-            border: 1px solid #afd3e7; /* New light blue */
+            border: 1px solid #afd3e7;
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -184,7 +192,7 @@
         }
         
         .control-btn:hover, .control-btn.active {
-            background: #53a8e1; /* New active blue */
+            background: #53a8e1;
             color: white;
             border-color: #53a8e1;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -194,7 +202,7 @@
         /* Slider styles */
         .slider-container {
             width: 100%;
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -203,7 +211,8 @@
 
         .slider-container label {
             font-weight: 600;
-            min-width: 50px;
+            min-width: 100px;
+            font-size: 0.95em;
         }
 
         .slider {
@@ -211,11 +220,15 @@
             width: 100%;
             height: 10px;
             border-radius: 5px;  
-            background: #d0bbdb; /* New neutral color */
+            background: #d0bbdb;
             outline: none;
             opacity: 0.8;
             -webkit-transition: .2s;
             transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
         }
 
         .slider::-webkit-slider-thumb {
@@ -224,7 +237,7 @@
             width: 20px;
             height: 20px;
             border-radius: 50%; 
-            background: #53a8e1; /* New blue */
+            background: #53a8e1;
             cursor: pointer;
             border: 2px solid white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -234,10 +247,17 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #53a8e1; /* New blue */
+            background: #53a8e1;
             cursor: pointer;
             border: 2px solid white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        #income-min-value, #slider-year-value {
+            font-weight: 700;
+            color: #53a8e1;
+            min-width: 60px;
+            text-align: right;
         }
         
         /* Visualization Containers */
@@ -246,7 +266,7 @@
             padding: 30px;
             background: white;
             border-radius: 8px;
-            border: 1px solid #d0bbdb; /* New neutral color */
+            border: 1px solid #d0bbdb;
         }
         
         .viz-title {
@@ -258,25 +278,25 @@
         }
         
         .viz-description {
-            font-size: 0.95em;
-            color: #53a8e1; /* New medium blue */
+            font-size: 0.9em; /* Reduced slightly */
+            color: #53a8e1;
             margin-bottom: 25px;
-            line-height: 1.6;
+            line-height: 1.5; /* Tighter */
         }
         
-        /* Insights Box */
+        /* Insights Box - REDUCED TEXT */
         .insight-box {
-            background: #afd3e7; /* New light blue */
-            padding: 30px;
+            background: #afd3e7;
+            padding: 25px; /* Reduced from 30px */
             margin: 30px 0;
             border-radius: 8px;
-            border-left: 4px solid #53a8e1; /* New medium blue */
+            border-left: 4px solid #53a8e1;
         }
         
         .insight-box h4 {
             color: #2C4A6B;
-            margin-bottom: 18px;
-            font-size: 1.3em;
+            margin-bottom: 15px; /* Reduced from 18px */
+            font-size: 1.2em; /* Slightly reduced */
             font-weight: 400;
         }
         
@@ -286,14 +306,15 @@
         }
         
         .insight-box li {
-            margin: 12px 0;
+            margin: 10px 0; /* Reduced from 12px */
             padding-left: 20px;
             position: relative;
+            font-size: 0.95em; /* Slightly smaller text */
         }
         
         .insight-box li:before {
             content: "•";
-            color: #53a8e1; /* New medium blue */
+            color: #53a8e1;
             font-weight: bold;
             position: absolute;
             left: 0;
@@ -310,32 +331,33 @@
         /* Two Column Layout for Scatters */
         .two-col-scatter-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Two equal columns */
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
             align-items: start;
         }
         
         /* Alert styles */
         .alert {
-            padding: 25px;
+            padding: 20px; /* Reduced from 25px */
             margin: 20px 0;
             border-radius: 8px;
             font-weight: 400;
             line-height: 1.6;
+            font-size: 0.95em; /* Slightly smaller */
         }
         
         .alert-warning {
-            background: #fca3a3; /* New warm color */
+            background: #fca3a3;
             color: white;
         }
         
         .alert-success {
-            background: #53a8e1; /* New blue */
+            background: #53a8e1;
             color: white;
         }
         
         .alert-info {
-            background: #afd3e7; /* New light blue */
+            background: #afd3e7;
             color: #2C4A6B;
         }
         
@@ -344,19 +366,31 @@
             display: block;
         }
         
-        /* Footer */
+        /* Footer with Metadata - RUBRIC */
         footer {
-            background: #2C4A6B; /* New dark blue */
+            background: #2C4A6B;
             color: white;
-            padding: 50px 0;
+            padding: 40px 0; /* Reduced from 50px */
             text-align: center;
-            margin-top: 80px;
+            margin-top: 60px; /* Reduced from 80px */
         }
         
         footer p {
-            margin: 15px 0;
-            opacity: 0.8;
+            margin: 10px 0;
+            opacity: 0.9;
             line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        footer a {
+            color: #afd3e7;
+            text-decoration: none;
+            border-bottom: 1px dotted #afd3e7;
+        }
+
+        footer a:hover {
+            color: white;
+            border-bottom-color: white;
         }
         
         /* Responsive adjustments */
@@ -377,7 +411,7 @@
         
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2.2em;
+                font-size: 2.5em; /* Responsive */
             }
             
             section {
@@ -395,15 +429,80 @@
             .stat-value {
                 font-size: 2.2em;
             }
+
+            .viz-container {
+                padding: 20px;
+            }
+        }
+
+        /* Extra small devices (phones, 480px and down) */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            section {
+                padding: 30px 15px;
+            }
+
+            section h2 {
+                font-size: 1.6em;
+            }
+
+            .viz-container {
+                padding: 15px;
+            }
+
+            .viz-title {
+                font-size: 1.1em;
+            }
+
+            .controls {
+                padding: 15px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .control-btn {
+                width: 100%;
+            }
+
+            /* Make map height responsive on mobile */
+            #vis-enhanced-map {
+                height: 400px;
+            }
         }
         
         /* Vega embed adjustments */
         .vega-embed {
-            width: 100%;
+            width: 100% !important;
         }
         
         .vega-embed details {
             display: none !important;
+        }
+
+        /* Ensure canvas and SVG use full width */
+        #vis-enhanced-map, #vis-efficiency-scatter, #vis-teacher-pressure,
+        #vis-timeline, #vis-gender-pipeline, #vis-ethnicity, #vis-age-structure {
+            width: 100%;
+        }
+
+        #vis-enhanced-map canvas, #vis-enhanced-map svg,
+        #vis-efficiency-scatter canvas, #vis-efficiency-scatter svg,
+        #vis-teacher-pressure canvas, #vis-teacher-pressure svg,
+        #vis-timeline canvas, #vis-timeline svg,
+        #vis-gender-pipeline canvas, #vis-gender-pipeline svg,
+        #vis-ethnicity canvas, #vis-ethnicity svg,
+        #vis-age-structure canvas, #vis-age-structure svg {
+            width: 100% !important;
+            height: auto !important;
         }
     </style>
 </head>
@@ -411,36 +510,34 @@
     <header>
         <div class="container">
             <h1>Education Access and Equity in Malaysia</h1>
-            <p>Comprehensive Analysis of Infrastructure, Resources, and Socioeconomic Context Across Malaysian States</p>
+            <p>Infrastructure, Resources, and Socioeconomic Context Across Malaysian States</p>
         </div>
     </header>
     
     <div class="container">
         
-        
+        <!-- Executive Summary - REDUCED TEXT -->
         <section>
             <h2>Executive Summary</h2>
             <div class="section-intro">
-                This analysis reveals critical insights about Malaysia's education system by examining infrastructure, resource allocation, and socioeconomic factors across 16 states. The findings highlight significant disparities between urban and rural areas, resource allocation challenges, and emerging demographic trends that require policy attention.
+                Analysis of Malaysia's education system reveals critical disparities in infrastructure, resources, and outcomes across 16 states, highlighting urban-rural divides and demographic shifts.
             </div>
             
             <div class="three-col-grid">
                 <div class="alert alert-warning">
-                    <strong>Urban Education Crisis:</strong> Selangor and Kuala Lumpur face severe teacher shortages with 15.7 students per teacher despite being Malaysia's wealthiest regions.
-                </div>
-                <div class="alert alert-info">
-                    <strong>Rural Resource Advantage:</strong> States like Sarawak maintain 4.5 times more schools per capita than urban areas, providing better educational infrastructure access.
+                    <strong>Urban Teacher Crisis:</strong> Selangor and Kuala Lumpur face severe shortages (15.7 students/teacher) despite highest incomes.
                 </div>
                 <div class="alert alert-success">
-                    <strong>Gender Education Shift:</strong> Women now represent 57.3% of post-secondary enrollment, indicating a significant demographic transition in higher education.
+                    <strong>Female Education Shift:</strong> Women now comprise 57.3% of post-secondary enrollment, indicating major demographic transition.
                 </div>
             </div>
         </section>
         
+        <!-- Interactive Map Section -->
         <section>
             <h2>Interactive Education-Economic Geography</h2>
             <div class="section-intro">
-                This interactive visualization reveals the complex relationship between education infrastructure and economic development across Malaysian states. The analysis shows how wealth, poverty, and education resources are distributed geographically.
+                Explore how wealth, poverty, and education resources distribute across Malaysia.
             </div>
             
             <div class="controls">
@@ -451,44 +548,63 @@
                     <button class="control-btn" data-layer="poverty">Poverty Rate</button>
                 </div>
             </div>
+
+            <div class="controls">
+                <h4>Zoom Controls</h4>
+                <div class="button-group">
+                    <button class="control-btn zoom-btn active" data-zoom="all">All Malaysia</button>
+                    <button class="control-btn zoom-btn" data-zoom="peninsular">Peninsular Malaysia</button>
+                    <button class="control-btn zoom-btn" data-zoom="east">East Malaysia</button>
+                </div>
+            </div>
             
             <div class="viz-container">
-                <div class="viz-title">Education Infrastructure Distribution</div>
-                <div class="viz-description">Interactive choropleth showing the relationship between education capacity and socioeconomic indicators. Hover for detailed state information.</div>
+                <div class="viz-title">Education Infrastructure Distribution by State, Malaysia 2022</div>
+                <div class="viz-description">Choropleth map with ocean background and graticule. Hover for state details.</div>
                 <div id="vis-enhanced-map"></div>
             </div>
             
-            <div>
+            <div class="insight-box">
                 <h4>Geographic Insights</h4>
                 <ul>
-                    <li><strong>Urban Education Paradox:</strong> Wealthiest states have the lowest school capacity per capita</li>
-                    <li><strong>Rural Resource Abundance:</strong> Sarawak leads with 11,589 schools per 10k versus Selangor's 2,564</li>
+                    <li><strong>Urban-Rural Divide:</strong> Sarawak has 4.5x more schools per capita than Selangor</li>
                     <li><strong>High-Need Areas:</strong> Sabah combines high poverty (19.7%) with moderate capacity</li>
-                    <li><strong>Economic Correlation:</strong> No direct correlation between wealth and education infrastructure</li>
+                    <li><strong>Wealth Paradox:</strong> Richest states have lowest education infrastructure per capita</li>
                 </ul>
             </div>
         </section>
 
+        <!-- Resource Allocation Section - WITH INCOME FILTER -->
         <section>
             <h2>Resource Allocation & Teacher Distribution</h2>
             <div class="section-intro">
-                These visualizations explore the efficiency of resource allocation and the critical distribution of teachers across states, highlighting economic factors and pressure points.
+                Resource allocation efficiency and teacher distribution patterns reveal economic disparities and pressure points.
+            </div>
+            
+            <!-- Income Filter Slider - NEW for RUBRIC -->
+            <div class="controls">
+                <h4>Filter by Income Range</h4>
+                <div class="slider-container">
+                    <label>Minimum Income:</label>
+                    <input type="range" min="4000" max="13000" value="4000" step="500"
+                           class="slider" id="income-min-slider">
+                    <span id="income-min-value">RM 4,000</span>
+                </div>
             </div>
             
             <div class="two-col-scatter-grid">
                 <div>
                     <div class="viz-container">
                         <div class="viz-title">Education Resources vs Economic Status</div>
-                        <div class="viz-description">Bubble size represents poverty levels. Position shows resource allocation efficiency.</div>
+                        <div class="viz-description">Bubble size = poverty level. Filter with slider above.</div>
                         <div id="vis-efficiency-scatter"></div>
                     </div>
-                    <div>
-                        <h4>Resource Efficiency Patterns</h4>
+                    <div class="insight-box">
+                        <h4>Resource Efficiency</h4>
                         <ul>
-                            <li><strong>Overperformers:</strong> Kelantan and Perlis deliver good education access despite low incomes</li>
-                            <li><strong>Underperformers:</strong> Wealthy urban states struggle with teacher shortages and capacity constraints</li>
-                            <li><strong>Balanced States:</strong> Negeri Sembilan and Melaka show optimal resource-outcome balance</li>
-                            <li><strong>Investment Priority:</strong> Sabah requires both economic development and education infrastructure support</li>
+                            <li><strong>Overperformers:</strong> Kelantan delivers good access despite low income</li>
+                            <li><strong>Urban Constraints:</strong> Wealthy states struggle with capacity</li>
+                            <li><strong>Sabah Priority:</strong> Needs both economic and education support</li>
                         </ul>
                     </div>
                 </div>
@@ -496,28 +612,28 @@
                 <div>
                     <div class="viz-container">
                         <div class="viz-title">Teacher Distribution Pressure Index</div>
-                        <div class="viz-description">Combining student-teacher ratios with economic context to identify pressure points.</div>
+                        <div class="viz-description">Student-teacher ratios with economic context.</div>
                         <div id="vis-teacher-pressure"></div>
                     </div>
-                    <div>
-                        <h4>Teacher Distribution Insights</h4>
+                    <div class="insight-box">
+                        <h4>Teacher Distribution</h4>
                         <ul>
-                            <li><strong>Urban Crisis:</strong> Federal territories and Selangor face severe shortages</li>
-                            <li><strong>Rural Advantage:</strong> Lower population density enables better teacher-student ratios</li>
-                            <li><strong>Economic Paradox:</strong> Wealthier states often have worse teaching conditions</li>
-                            <li><strong>Policy Opportunity:</strong> Rural teaching models could inform urban solutions</li>
+                            <li><strong>Federal Territory Crisis:</strong> Severe shortages in urban centers</li>
+                            <li><strong>Rural Advantage:</strong> Better ratios in lower-density states</li>
+                            <li><strong>Policy Opportunity:</strong> Apply rural models to urban areas</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
         
+        <!-- Temporal Analysis Section - REDUCED TEXT -->
         <section>
             <h2>Temporal Analysis and Trends</h2>
             <div class="two-panel">
                 <div class="content-panel">
                     <div class="section-intro">
-                        Understanding how Malaysia's education system evolved from 2017-2022 reveals important trends and helps identify emerging challenges that require policy intervention.
+                        Track Malaysia's education evolution from 2017-2022 to identify emerging challenges.
                     </div>
                     
                     <div class="controls">
@@ -529,13 +645,12 @@
                         </div>
                     </div>
                     
-                    <div>
+                    <div class="insight-box">
                         <h4>Temporal Trends</h4>
                         <ul>
-                            <li><strong>Enrollment Stability:</strong> Primary enrollment stable at approximately 2.77 million students</li>
-                            <li><strong>Post-Secondary Growth:</strong> 18% increase from 2017-2022 with growing female participation</li>
-                            <li><strong>Teacher Shortage Crisis:</strong> Urban states experiencing deteriorating ratios over time</li>
-                            <li><strong>Infrastructure Gap:</strong> School construction not keeping pace with urban population growth</li>
+                            <li><strong>Stable Primary:</strong> ~2.77M students maintained</li>
+                            <li><strong>Post-Secondary Growth:</strong> 18% increase 2017-2022</li>
+                            <li><strong>Urban Deterioration:</strong> Teacher ratios worsening</li>
                         </ul>
                     </div>
                 </div>
@@ -543,53 +658,54 @@
                 <div class="viz-panel">
                     <div class="viz-container">
                         <div class="viz-title">Multi-Metric Education Timeline</div>
-                        <div class="viz-description">Interactive timeline tracking students and teachers over time. Use the slider to filter by year.</div>
+                        <div class="viz-description">Filter by year using the slider above.</div>
                         <div id="vis-timeline"></div>
                     </div>
                 </div>
             </div>
         </section>
         
+        <!-- Demographics Section - REDUCED TEXT -->
         <section>
             <h2>Demographic Analysis</h2>
             
             <div class="single-col">
                 <div class="section-intro">
-                    Demographic patterns significantly influence education demand and outcomes. This analysis examines gender progression, ethnic representation, and age structure impacts across the education system.
+                    Gender, ethnicity, and age patterns shape education demand and outcomes.
                 </div>
             </div>
             
             <div class="three-col-grid">
                 <div class="viz-container">
                     <div class="viz-title">Gender Progression Pipeline</div>
-                    <div class="viz-description">How gender balance shifts through education stages.</div>
+                    <div class="viz-description">Gender balance shifts through stages.</div>
                     <div id="vis-gender-pipeline"></div>
                 </div>
                 
                 <div class="viz-container">
                     <div class="viz-title">Ethnic Representation</div>
-                    <div class="viz-description">Student demographics across major ethnic groups.</div>
+                    <div class="viz-description">Student demographics across groups.</div>
                     <div id="vis-ethnicity"></div>
                 </div>
                 
                 <div class="viz-container">
                     <div class="viz-title">Age Distribution Impact</div>
-                    <div class="viz-description">How population age structure affects education demand.</div>
+                    <div class="viz-description">Population structure effects.</div>
                     <div id="vis-age-structure"></div>
                 </div>
             </div>
             
-            <div>
+            <div class="insight-box">
                 <h4>Demographic Insights</h4>
                 <ul>
-                    <li><strong>Female Education Revolution:</strong> Post-secondary gender gap (57.3% female) indicates significant societal transformation</li>
-                    <li><strong>Ethnic Patterns:</strong> Bumiputera majority in rural states with greater diversity in urban areas</li>
-                    <li><strong>Age Structure Challenge:</strong> States with young populations require more primary school infrastructure</li>
-                    <li><strong>Future Implications:</strong> Gender shift may significantly impact workforce composition by 2030</li>
+                    <li><strong>Female Dominance:</strong> 57.3% post-secondary indicates workforce transformation</li>
+                    <li><strong>Young Population:</strong> States with youth require more primary infrastructure</li>
+                    <li><strong>Ethnic Diversity:</strong> Greater diversity in urban vs. rural areas</li>
                 </ul>
             </div>
         </section>
         
+        <!-- Policy Recommendations - CONDENSED -->
         <section>
             <h2>Policy Recommendations</h2>
             
@@ -597,53 +713,70 @@
             <div class="three-col-grid">
                 <div class="alert alert-warning">
                     <strong>Urban Teacher Recruitment:</strong>
-                    Launch emergency teacher recruitment for Selangor, Kuala Lumpur, and Putrajaya targeting 3,000 additional primary teachers.
+                    Target 3,000 additional teachers for Selangor, KL, and Putrajaya.
                 </div>
                 <div class="alert alert-info">
                     <strong>Infrastructure Investment:</strong>
-                    Fast-track school construction in high-growth urban areas, prioritizing Selangor districts with ratios exceeding 16:1.
+                    Fast-track school construction in high-growth urban districts.
                 </div>
                 <div class="alert alert-success">
                     <strong>Rural Model Replication:</strong>
-                    Study and replicate successful rural education models from Perlis and Terengganu for broader application.
+                    Study successful models from Perlis and Terengganu.
                 </div>
             </div>
             
             <h3>Medium-term Strategy (2025-2027)</h3>
-            <ul style="margin-left: 30px; line-height: 1.8;">
-                <li><strong>Teacher Incentive Programs:</strong> Implement higher pay scales for urban postings, housing assistance, and career development pathways</li>
-                <li><strong>Digital Infrastructure:</strong> Leverage technology solutions to supplement teacher shortages in high-pressure urban areas</li>
-                <li><strong>Gender Studies Initiative:</strong> Research post-secondary gender gap implications for long-term workforce planning</li>
-                <li><strong>District-level Planning:</strong> Move beyond state-level analysis to target specific districts requiring intervention</li>
+            <ul style="margin-left: 30px; line-height: 1.7;">
+                <li><strong>Teacher Incentives:</strong> Higher pay, housing assistance for urban postings</li>
+                <li><strong>Digital Solutions:</strong> Technology to supplement urban teacher shortages</li>
+                <li><strong>Gender Research:</strong> Study post-secondary gap for workforce planning</li>
             </ul>
             
             <h3>Long-term Vision (2027-2030)</h3>
-            <ul style="margin-left: 30px; line-height: 1.8;">
-                <li>Achieve optimal teacher-student ratios (≤12:1) across all urban centers</li>
-                <li>Develop integrated education-economic development plans for high-poverty states</li>
-                <li>Create a comprehensive national education equity index for continuous monitoring</li>
-                <li>Prepare education systems for demographic transitions and evolving workforce demands</li>
+            <ul style="margin-left: 30px; line-height: 1.7;">
+                <li>Achieve ≤12:1 teacher-student ratios in all urban centers</li>
+                <li>Integrated education-economic plans for high-poverty states</li>
+                <li>National education equity index for monitoring</li>
             </ul>
         </section>
     </div>
     
+    <!-- Footer with Metadata - RUBRIC REQUIREMENT -->
+    <footer>
+        <div class="container">
+            <p><strong>Author:</strong> shanwu zhang | <strong>Unit:</strong> FIT3179 Data Visualisation 2 | <strong>Date:</strong> October 2025</p>
+            <p><strong>Data Sources:</strong> 
+                <!-- should add the links here -->
+            </p>
+            
+            <!-- <p style="margin-top: 20px; font-size: 0.85em; opacity: 0.7;">
+                Monash University Malaysia | ©2025
+            </p> -->
+        </div>
+    </footer>
+    
     
     
     <script>
-        // New Color Palette based on Image 3
+        // Color Palette
         const colorSchemes = {
             lightBlue: "#afd3e7",
             mediumBlue: "#53a8e1",
+            darkBlue: "#2C79A8",
+            veryDarkBlue: "#1a4d6b",
             lightRed: "#fca3a3",
             mediumRed: "#ed5f5f",
-            lightOrange: "#fcd8c",
-            mediumOrange: "#ffa74f",
+            darkRed: "#d62828",
+            lightOrange: "#fef5e7",
+            mediumOrange: "#fcd8c7",
+            darkOrange: "#ffa74f",
+            veryDarkOrange: "#ff6b35",
             lightPurple: "#d0bbdb",
             mediumPurple: "#9a72c7",
-            darkBlue: "#2C4A6B" // Keeping a dark base for text/header
+            textDark: "#2C4A6B"
         };
         
-        // Enhanced map data (no change, just referencing for completeness)
+        // Enhanced map data
         const enhancedMapData = [
             {state: "Selangor", schools_per_10k: 2564, income_mean: 12233, poverty: 1.5},
             {state: "Kuala Lumpur", schools_per_10k: 2844, income_mean: 13325, poverty: 1.4},
@@ -664,9 +797,26 @@
         ];
         
         let currentMapLayer = 'schools';
+        let currentMinIncome = 4000; // For scatter filter
+        let currentZoom = 'all'; // For zoom controls
         
-        // Enhanced interactive map
+        // Enhanced interactive map with RUBRIC requirements
         function createEnhancedMap() {
+            // Get zoom settings based on current zoom level
+            const getZoomSettings = () => {
+                switch(currentZoom) {
+                    case 'all':
+                        return {"center": [109, 4.2], "scale": 2800};
+                    case 'peninsular':
+                        return {"center": [102, 4.0], "scale": 4500};
+                    case 'east':
+                        return {"center": [115, 4.0], "scale": 4000};
+                    default:
+                        return {"center": [109, 4.2], "scale": 2800};
+                }
+            };
+            
+            const zoomSettings = getZoomSettings();
             const getColorField = (layer) => {
                 switch(layer) {
                     case 'schools': return 'schools_per_10k';
@@ -676,19 +826,40 @@
                 }
             };
             
+            // DISCRETE COLOR SCALES - RUBRIC - Using Threshold
             const getColorScale = (layer) => {
                 switch(layer) {
-                    case 'schools': return {"range": [colorSchemes.lightBlue, colorSchemes.darkBlue]}; // Using new palette
-                    case 'income': return {"range": [colorSchemes.lightOrange, colorSchemes.mediumOrange]}; // Using new palette
-                    case 'poverty': return {"range": [colorSchemes.lightRed, colorSchemes.mediumRed]}; // Using new palette
-                    default: return {"range": [colorSchemes.lightBlue, colorSchemes.darkBlue]};
+                    case 'schools': 
+                        return {
+                            "type": "threshold",
+                            "domain": [4000, 6000, 8000, 10000],
+                            "range": ["#e8f4f8", "#afd3e7", "#53a8e1", "#2C79A8", "#1a4d6b"]
+                        };
+                    case 'income': 
+                        return {
+                            "type": "threshold",
+                            "domain": [6000, 8000, 10000, 12000],
+                            "range": ["#fef5e7", "#fcd8c7", "#ffa74f", "#ff8c42", "#ff6b35"]
+                        };
+                    case 'poverty': 
+                        return {
+                            "type": "threshold",
+                            "domain": [2, 5, 10, 15],
+                            "range": ["#e8f4f8", "#fcd8c7", "#fca3a3", "#ed5f5f", "#d62828"]
+                        };
+                    default: 
+                        return {
+                            "type": "threshold",
+                            "domain": [4000, 6000, 8000, 10000],
+                            "range": ["#e8f4f8", "#afd3e7", "#53a8e1", "#2C79A8", "#1a4d6b"]
+                        };
                 }
             };
             
             const getLegendTitle = (layer) => {
                 switch(layer) {
                     case 'schools': return 'Schools per 10,000';
-                    case 'income': return 'Average Income (RM)';
+                    case 'income': return 'Avg Income (RM)';
                     case 'poverty': return 'Poverty Rate (%)';
                     default: return 'Schools per 10,000';
                 }
@@ -698,9 +869,31 @@
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
                 "width": "container",
                 "height": 600,
-                "projection": {"type": "mercator", "center": [109, 4.2], "scale": 2800},
+                "projection": {
+                    "type": "equalEarth", 
+                    "center": zoomSettings.center, 
+                    "scale": zoomSettings.scale
+                },
                 "layer": [
-                    {"data": {"sphere": true}, "mark": {"type": "geoshape", "fill": "#f7f7f7", "stroke": "#d0bbdb"}},
+                    // 1. OCEAN BACKGROUND - RUBRIC REQUIREMENT
+                    {
+                        "data": {"sphere": true},
+                        "mark": {"type": "geoshape", "fill": "#d4e7f5", "stroke": "#b8d4e8"}
+                    },
+                    // 2. GRATICULE - RUBRIC REQUIREMENT
+                    {
+                        "data": {"graticule": {"step": [5, 5]}},
+                        "mark": {"type": "geoshape", "fill": null, "stroke": "#b8d4e8", "strokeWidth": 0.5, "opacity": 0.6}
+                    },
+                    // 3. NEIGHBORING COUNTRIES - RUBRIC REQUIREMENT (Reference layer)
+                    {
+                        "data": {
+                            "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+                            "format": {"type": "topojson", "feature": "countries"}
+                        },
+                        "mark": {"type": "geoshape", "fill": "#e8e8e8", "stroke": "#ffffff", "strokeWidth": 0.5}
+                    },
+                    // 4. MALAYSIA CHOROPLETH - Main visualization
                     {
                         "data": {
                             "url": "https://raw.githubusercontent.com/xiaofuhebadoan/Data-Visualization-2/main/malaysia_districts.json",
@@ -714,20 +907,55 @@
                                 "fields": ["schools_per_10k", "income_mean", "poverty"]
                             }
                         }],
-                        "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
+                        "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1.5},
                         "encoding": {
                             "color": {
                                 "field": getColorField(currentMapLayer),
                                 "type": "quantitative",
                                 "scale": getColorScale(currentMapLayer),
-                                "legend": {"title": getLegendTitle(currentMapLayer), "orient": "right"}
+                                "legend": {
+                                    "title": getLegendTitle(currentMapLayer), 
+                                    "orient": "right",
+                                    "titleFontSize": 13,
+                                    "labelFontSize": 11
+                                }
                             },
                             "tooltip": [
                                 {"field": "properties.name", "type": "nominal", "title": "State"},
                                 {"field": "schools_per_10k", "type": "quantitative", "title": "Schools per 10k", "format": ",.0f"},
-                                {"field": "income_mean", "type": "quantitative", "title": "Average Income (RM)", "format": ","},
+                                {"field": "income_mean", "type": "quantitative", "title": "Avg Income (RM)", "format": ","},
                                 {"field": "poverty", "type": "quantitative", "title": "Poverty Rate (%)", "format": ".1f"}
                             ]
+                        }
+                    },
+                    // 5. STATE TEXT ANNOTATIONS - PEER FEEDBACK REQUIREMENT
+                    {
+                        "data": {
+                            "values": [
+                                {"state": "Selangor", "lon": 101.5, "lat": 3.1, "dx": -35, "dy": 0},
+                                {"state": "Johor", "lon": 103.5, "lat": 1.9, "dx": 0, "dy": 10},
+                                {"state": "Sarawak", "lon": 112, "lat": 2.5, "dx": 0, "dy": 0},
+                                {"state": "Sabah", "lon": 116.5, "lat": 5.5, "dx": 0, "dy": 0},
+                                {"state": "Pulau Pinang", "lon": 100.3, "lat": 5.4, "dx": -45, "dy": 0},
+                                {"state": "Kelantan", "lon": 102.3, "lat": 5.8, "dx": 0, "dy": -10},
+                                {"state": "Perak", "lon": 101.0, "lat": 4.6, "dx": -30, "dy": 5}
+                            ]
+                        },
+                        "mark": {
+                            "type": "text",
+                            "fontSize": 14,
+                            "fontWeight": "bold",
+                            "fill": "#000000",
+                            // "stroke": "#ffffff",
+                            "strokeWidth": 2,
+                            "opacity": 1
+                        },
+                        "encoding": {
+                            "longitude": {"field": "lon", "type": "quantitative"},
+                            "latitude": {"field": "lat", "type": "quantitative"},
+                            "text": {"field": "state", "type": "nominal"},
+                            "dx": {"field": "dx", "type": "quantitative"},
+                            "dy": {"field": "dy", "type": "quantitative"}
                         }
                     }
                 ]
@@ -736,30 +964,50 @@
             return mapSpec;
         }
         
-        // Resource efficiency scatter plot
-        const efficiencyScatterSpec = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": "container",
-            "height": 400,
-            "data": {"values": enhancedMapData},
-            "mark": {"type": "circle", "size": 120, "opacity": 0.8},
-            "encoding": {
-                "x": {"field": "income_mean", "type": "quantitative", "title": "Average Monthly Income (RM)", "scale": {"zero": false}},
-                "y": {"field": "schools_per_10k", "type": "quantitative", "title": "Schools per 10,000 Population", "scale": {"zero": false}},
-                "size": {"field": "poverty", "type": "quantitative", "title": "Poverty Rate (%)", "scale": {"range": [80, 300]}},
-                "color": {"value": colorSchemes.mediumBlue}, // Using new palette
-                "stroke": {"value": colorSchemes.darkBlue}, // Using new palette
-                "strokeWidth": {"value": 1},
-                "tooltip": [
-                    {"field": "state", "type": "nominal", "title": "State"},
-                    {"field": "income_mean", "type": "quantitative", "title": "Income (RM)", "format": ","},
-                    {"field": "schools_per_10k", "type": "quantitative", "title": "Schools per 10k", "format": ",.0f"},
-                    {"field": "poverty", "type": "quantitative", "title": "Poverty (%)", "format": ".1f"}
-                ]
-            }
-        };
+        // Resource efficiency scatter with FILTER - RUBRIC INTERACTIVITY
+        function createEfficiencyScatter(minIncome) {
+            const filteredData = enhancedMapData.filter(d => d.income_mean >= minIncome);
+            
+            return {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "width": "container",
+                "height": 400,
+                "autosize": {"type": "fit", "contains": "padding"},
+                "data": {"values": filteredData},
+                "mark": {"type": "circle", "size": 120, "opacity": 0.8},
+                "encoding": {
+                    "x": {
+                        "field": "income_mean", 
+                        "type": "quantitative", 
+                        "title": "Average Monthly Income (RM)", 
+                        "scale": {"zero": false}
+                    },
+                    "y": {
+                        "field": "schools_per_10k", 
+                        "type": "quantitative", 
+                        "title": "Schools per 10,000 Population", 
+                        "scale": {"zero": false}
+                    },
+                    "size": {
+                        "field": "poverty", 
+                        "type": "quantitative", 
+                        "title": "Poverty Rate (%)", 
+                        "scale": {"range": [80, 300]}
+                    },
+                    "color": {"value": colorSchemes.mediumBlue},
+                    "stroke": {"value": colorSchemes.darkBlue},
+                    "strokeWidth": {"value": 1},
+                    "tooltip": [
+                        {"field": "state", "type": "nominal", "title": "State"},
+                        {"field": "income_mean", "type": "quantitative", "title": "Income (RM)", "format": ","},
+                        {"field": "schools_per_10k", "type": "quantitative", "title": "Schools per 10k", "format": ",.0f"},
+                        {"field": "poverty", "type": "quantitative", "title": "Poverty (%)", "format": ".1f"}
+                    ]
+                }
+            };
+        }
         
-        // Teacher pressure data
+        // Teacher pressure scatter
         const teacherPressureData = [
             {state: "Selangor", ratio: 15.7, income: 12233, category: "High Pressure"},
             {state: "Kuala Lumpur", ratio: 15.4, income: 13325, category: "High Pressure"},
@@ -779,6 +1027,7 @@
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "width": "container",
             "height": 400,
+            "autosize": {"type": "fit", "contains": "padding", "resize": true},
             "data": {"values": teacherPressureData},
             "mark": {"type": "circle", "size": 150},
             "encoding": {
@@ -788,7 +1037,7 @@
                     "field": "category", "type": "nominal", "title": "Pressure Level",
                     "scale": {
                         "domain": ["Low Pressure", "Balanced", "Medium Pressure", "High Pressure"],
-                        "range": [colorSchemes.mediumBlue, colorSchemes.lightBlue, colorSchemes.lightOrange, colorSchemes.mediumRed] // Using new palette
+                        "range": [colorSchemes.mediumBlue, colorSchemes.lightBlue, colorSchemes.darkOrange, colorSchemes.mediumRed]
                     }
                 },
                 "tooltip": [
@@ -816,16 +1065,16 @@
             {year: 2022, metric: "Teachers", value: 434567}
         ];
         
-        // Timeline data and interactive specification
-        let currentTimelineYear = 2022; // Default year for the slider
+        let currentTimelineYear = 2022;
 
         function createTimelineSpec() {
             const filteredData = timelineData.filter(d => d.year <= currentTimelineYear);
             
-            const timelineSpec = {
+            return {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
                 "width": "container", 
                 "height": 350,
+                "autosize": {"type": "fit", "contains": "padding"},
                 "data": {"values": filteredData},
                 "mark": {"type": "line", "point": true, "strokeWidth": 3},
                 "encoding": {
@@ -833,7 +1082,7 @@
                     "y": {"field": "value", "type": "quantitative", "title": "Count", "scale": {"zero": false}},
                     "color": {
                         "field": "metric", "type": "nominal", "title": "Metric",
-                        "scale": {"range": [colorSchemes.darkBlue, colorSchemes.mediumBlue]} // Using new palette
+                        "scale": {"range": [colorSchemes.textDark, colorSchemes.mediumBlue]}
                     },
                     "tooltip": [
                         {"field": "year", "type": "ordinal", "title": "Year"},
@@ -842,8 +1091,6 @@
                     ]
                 }
             };
-            
-            return timelineSpec;
         }
         
         // Gender data
@@ -860,6 +1107,7 @@
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "width": "container",
             "height": 220,
+            "autosize": {"type": "fit", "contains": "padding", "resize": true},
             "data": {"values": genderData},
             "mark": "bar",
             "encoding": {
@@ -867,7 +1115,7 @@
                 "y": {"field": "stage", "type": "nominal", "title": "Education Stage"},
                 "color": {
                     "field": "gender", "type": "nominal", "title": "Gender",
-                    "scale": {"range": [colorSchemes.darkBlue, colorSchemes.mediumBlue]} // Using new palette
+                    "scale": {"range": [colorSchemes.textDark, colorSchemes.mediumBlue]}
                 },
                 "tooltip": [
                     {"field": "stage", "type": "nominal", "title": "Stage"},
@@ -890,13 +1138,22 @@
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "width": "container",
             "height": 220,
+            "autosize": {"type": "fit", "contains": "padding", "resize": true},
             "data": {"values": ethnicityData},
             "mark": {"type": "arc", "innerRadius": 40},
             "encoding": {
                 "theta": {"field": "percentage", "type": "quantitative"},
                 "color": {
                     "field": "ethnicity", "type": "nominal", "title": "Ethnicity",
-                    "scale": {"range": [colorSchemes.darkBlue, colorSchemes.mediumBlue, colorSchemes.lightBlue, colorSchemes.mediumOrange, colorSchemes.mediumRed]} // Using new palette
+                    "scale": {
+                        "range": [
+                            colorSchemes.textDark, 
+                            colorSchemes.mediumBlue, 
+                            colorSchemes.lightBlue, 
+                            colorSchemes.mediumOrange, 
+                            colorSchemes.lightPurple
+                        ]
+                    }
                 },
                 "tooltip": [
                     {"field": "ethnicity", "type": "nominal", "title": "Ethnicity"},
@@ -917,8 +1174,9 @@
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "width": "container",
             "height": 220,
+            "autosize": {"type": "fit", "contains": "padding", "resize": true},
             "data": {"values": ageData},
-            "mark": {"type": "bar", "color": colorSchemes.darkBlue}, // Using new palette
+            "mark": {"type": "bar", "color": colorSchemes.textDark},
             "encoding": {
                 "x": {"field": "ageGroup", "type": "ordinal", "title": "Age Group"},
                 "y": {"field": "percentage", "type": "quantitative", "title": "Percentage of Population"},
@@ -931,7 +1189,7 @@
         
         // Control functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Map controls
+            // Map layer controls
             const mapControlBtns = document.querySelectorAll('[data-layer]');
             mapControlBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -939,6 +1197,19 @@
                     this.classList.add('active');
                     
                     currentMapLayer = this.dataset.layer;
+                    const newMapSpec = createEnhancedMap();
+                    vegaEmbed('#vis-enhanced-map', newMapSpec, {actions: false}).catch(console.error);
+                });
+            });
+
+            // Zoom controls
+            const zoomBtns = document.querySelectorAll('[data-zoom]');
+            zoomBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    zoomBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentZoom = this.dataset.zoom;
                     const newMapSpec = createEnhancedMap();
                     vegaEmbed('#vis-enhanced-map', newMapSpec, {actions: false}).catch(console.error);
                 });
@@ -954,10 +1225,21 @@
                 const newTimelineSpec = createTimelineSpec();
                 vegaEmbed('#vis-timeline', newTimelineSpec, {actions: false}).catch(console.error);
             });
+
+            // Income filter slider - NEW FOR RUBRIC
+            const incomeSlider = document.getElementById('income-min-slider');
+            const incomeValue = document.getElementById('income-min-value');
+
+            incomeSlider.addEventListener('input', function() {
+                currentMinIncome = parseInt(this.value);
+                incomeValue.textContent = 'RM ' + currentMinIncome.toLocaleString();
+                const newScatterSpec = createEfficiencyScatter(currentMinIncome);
+                vegaEmbed('#vis-efficiency-scatter', newScatterSpec, {actions: false}).catch(console.error);
+            });
             
             // Embed all visualizations initially
             vegaEmbed('#vis-enhanced-map', createEnhancedMap(), {actions: false}).catch(console.error);
-            vegaEmbed('#vis-efficiency-scatter', efficiencyScatterSpec, {actions: false}).catch(console.error);
+            vegaEmbed('#vis-efficiency-scatter', createEfficiencyScatter(currentMinIncome), {actions: false}).catch(console.error);
             vegaEmbed('#vis-teacher-pressure', teacherPressureSpec, {actions: false}).catch(console.error);
             vegaEmbed('#vis-timeline', createTimelineSpec(), {actions: false}).catch(console.error);
             vegaEmbed('#vis-gender-pipeline', genderSpec, {actions: false}).catch(console.error);
