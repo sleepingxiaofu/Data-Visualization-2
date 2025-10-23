@@ -783,10 +783,10 @@
                         },
                         "mark": {
                             "type": "circle",
-                            "size": 200,
+                            "size": 300,
                             "filled": true,
                             "stroke": "white",
-                            "strokeWidth": 2
+                            "strokeWidth": 3
                         },
                         "encoding": {
                             "longitude": {"field": "lon", "type": "quantitative"},
@@ -956,23 +956,60 @@
             return {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
                 "width": "container", 
-                "height": 350,
+                "height": 400,
                 "autosize": {"type": "fit", "contains": "padding"},
                 "data": {"values": filteredData},
-                "mark": {"type": "line", "point": true, "strokeWidth": 3},
-                "encoding": {
-                    "x": {"field": "year", "type": "ordinal", "title": "Year"},
-                    "y": {"field": "value", "type": "quantitative", "title": "Count", "scale": {"zero": false}},
-                    "color": {
-                        "field": "metric", "type": "nominal", "title": "Metric",
-                        "scale": {"range": [colorSchemes.textDark, colorSchemes.mediumBlue]}
+                "layer": [
+                    {
+                        "mark": {"type": "line", "point": true, "strokeWidth": 3},
+                        "encoding": {
+                            "x": {"field": "year", "type": "ordinal", "title": "Year"},
+                            "y": {
+                                "field": "value", 
+                                "type": "quantitative", 
+                                "title": "Students (Millions)",
+                                "scale": {"zero": false, "domain": [4700000, 4850000]},
+                                "axis": {"title": "Students (Millions)", "titleColor": colorSchemes.textDark}
+                            },
+                            "color": {"value": colorSchemes.textDark},
+                            "opacity": {
+                                "condition": {"test": "datum.metric === 'Students'", "value": 1},
+                                "value": 0
+                            },
+                            "tooltip": [
+                                {"field": "year", "type": "ordinal", "title": "Year"},
+                                {"field": "metric", "type": "nominal", "title": "Metric"},
+                                {"field": "value", "type": "quantitative", "title": "Count", "format": ","}
+                            ]
+                        },
+                        "transform": [{"filter": "datum.metric === 'Students'"}]
                     },
-                    "tooltip": [
-                        {"field": "year", "type": "ordinal", "title": "Year"},
-                        {"field": "metric", "type": "nominal", "title": "Metric"},
-                        {"field": "value", "type": "quantitative", "title": "Count", "format": ","}
-                    ]
-                }
+                    {
+                        "mark": {"type": "line", "point": true, "strokeWidth": 3},
+                        "encoding": {
+                            "x": {"field": "year", "type": "ordinal", "title": "Year"},
+                            "y": {
+                                "field": "value", 
+                                "type": "quantitative", 
+                                "title": "Teachers (Thousands)",
+                                "scale": {"zero": false, "domain": [420000, 440000]},
+                                "axis": {"title": "Teachers (Thousands)", "titleColor": colorSchemes.mediumBlue}
+                            },
+                            "color": {"value": colorSchemes.mediumBlue},
+                            "opacity": {
+                                "condition": {"test": "datum.metric === 'Teachers'", "value": 1},
+                                "value": 0
+                            },
+                            "tooltip": [
+                                {"field": "year", "type": "ordinal", "title": "Year"},
+                                {"field": "metric", "type": "nominal", "title": "Metric"},
+                                {"field": "value", "type": "quantitative", "title": "Count", "format": ","}
+                            ]
+                        },
+                        "transform": [{"filter": "datum.metric === 'Teachers'"}]
+                    }
+                ],
+                "resolve": {"scale": {"y": "independent"}}
             };
         }
         
